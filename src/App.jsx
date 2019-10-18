@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import AutoComplete from './components/AutoComplete';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
     line-height: 1.5em;
   `;
 
+
   return (
     <>
       <GradientBackground />
@@ -47,6 +49,7 @@ function App() {
           <br />
           Select cities to compare using the search tool below.
         </Content>
+        <AutoComplete />
       </AppContainer>
     </>
   );
