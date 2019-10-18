@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const CardListContainer = styled.section`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+`;
 
 function CardList() {
-  const CardListContainer = styled.section`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  `;
+
 
   return (
     <CardListContainer>
