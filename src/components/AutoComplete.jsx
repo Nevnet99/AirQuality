@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Search } from 'styled-icons/icomoon/Search';
 import { useDispatch, useSelector } from 'react-redux';
+import { addUserCity, getAutoCompleteData } from '../redux/actions/index';
+
 
 const AutoCompleteContainer = styled.section`
     display: flex;
@@ -89,7 +91,8 @@ const AutoCompleteSection = styled.ul`
   `;
 
 const AutoCompleteItem = styled.li`
-  
+      margin: 0.5em 0em;
+      font-weight: 100;
   `;
 
 
@@ -97,21 +100,27 @@ function AutoComplete() {
   const autoCompleteItems = useSelector((state) => state.autoCompleteCities);
   const userCity = useSelector((state) => state.userCity);
   const dispatch = useDispatch();
- 
+
+  const handleInputChange = (e) => {
+    dispatch(addUserCity(e.target.value));
+    dispatch(getAutoCompleteData(userCity));
+  };
+
+
   return (
     <AutoCompleteContainer>
       <InputContainer>
         <FaIcon icon={Search} title="Search" />
-        <Input onChange={(e) => dispatch({type: 'ADD_USERCITY', payload: e.target.value })} value={userCity} type="text" name="city" placeholder="Enter city name..." />
+        <Input autoComplete="off" onChange={handleInputChange} value={userCity} type="text" name="city" placeholder="Enter city name..." />
 
         {
-         autoCompleteItems.length
+         autoCompleteItems.length && userCity !== ''
            ? (
              <AutoCompleteSection>
                {
-              autoCompleteItems.map((cityName) => (
-                <AutoCompleteItem>
-                  {cityName}
+              autoCompleteItems.map((cityInfo) => (
+                <AutoCompleteItem key={cityInfo.id}>
+                  {cityInfo.location}
                 </AutoCompleteItem>
               ))
             }

@@ -1,10 +1,5 @@
 import axios from 'axios';
-import { ADD_CITY, ADD_USERCITY } from '../constants/index';
-
-
-export function addCity(payload) {
-  return { type: ADD_CITY, payload };
-}
+import { GET_AUTOCOMPLETEDATA, ADD_USERCITY } from '../constants/index';
 
 export function addUserCity(payload) {
   return { type: ADD_USERCITY, payload };
@@ -12,9 +7,9 @@ export function addUserCity(payload) {
 
 export function getAutoCompleteData(city) {
   return function (dispatch) {
-    return axios.get(`https://api.openaq.org/v1/locations?city=${city}`)
+    return axios.get(`https://api.openaq.org/v1/locations?city=${city}&country=GB`)
       .then((response) => {
-        dispatch({ type: 'DATA_LOADED', payload: response });
+        dispatch({ type: GET_AUTOCOMPLETEDATA, payload: response.data.results });
       });
   };
 }

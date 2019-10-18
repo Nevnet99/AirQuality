@@ -1,23 +1,20 @@
-import { ADD_CITY, ADD_USERCITY } from '../constants/index';  
+import { ADD_USERCITY, GET_AUTOCOMPLETEDATA } from '../constants/index';
 
 const initialState = {
   autoCompleteCities: [],
-  userCity: "",
+  userCity: '',
 };
 function rootReducer(state = initialState, action) {
-  if (action.type === ADD_CITY) {
-    return Object.assign({}, state, {
-      autoCompleteCities: state.autoCompleteCities.concat(action.payload)
-    });
+  if (action.type === GET_AUTOCOMPLETEDATA) {
+    return { ...state, autoCompleteCities: action.payload };
   }
 
   if (action.type === ADD_USERCITY) {
-    return Object.assign({}, state, {
-      userCity: action.payload
-    })
-  }  
+    return { ...state, userCity: action.payload };
+  }
 
   return state;
 }
+
 
 export default rootReducer;
