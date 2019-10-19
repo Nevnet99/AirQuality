@@ -1,14 +1,17 @@
 import { ADD_USERCITY, GET_AUTOCOMPLETEDATA, CHOSEN_CITY } from '../constants/index';
-import { stat } from 'fs';
 
 const initialState = {
   autoCompleteCities: [],
+  autoCompleteData: [],
   userCity: '',
   pickedCities: [],
 };
 function rootReducer(state = initialState, action) {
   if (action.type === GET_AUTOCOMPLETEDATA) {
-    return { ...state, autoCompleteCities: action.payload };
+    const getDistinctCities = action.payload.map((item) => item.city)
+      .filter((value, index, self) => self.indexOf(value) === index);
+
+    return { ...state, autoCompleteCities: getDistinctCities, autoCompleteData: action.payload };
   }
 
   if (action.type === ADD_USERCITY) {
@@ -16,8 +19,8 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === CHOSEN_CITY) {
-    const userChosenCity = state.autoCompleteCities.filter((city) => {
-      if (city.id === action.payload) {
+    const userChosenCity = state.autoCompleteData.filter((city) => {
+      if (city.city === action.payload) {
         return city;
       }
     });

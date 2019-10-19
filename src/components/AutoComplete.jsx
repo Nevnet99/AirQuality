@@ -134,9 +134,9 @@ function AutoComplete() {
            ? (
              <AutoCompleteSection>
                {
-              autoCompleteItems.map((cityInfo) => (
-                <AutoCompleteItem onClick={() => { dispatch(selectedCity(cityInfo.id)); }} key={cityInfo.id}>
-                  {cityInfo.location}
+              autoCompleteItems.map((cityName) => (
+                <AutoCompleteItem onClick={() => { dispatch(selectedCity(cityName)); }} key={cityName}>
+                  {cityName}
                 </AutoCompleteItem>
               ))
             }
