@@ -8,13 +8,17 @@ import { clearErrors } from './redux/actions';
 const GradientBackground = styled.div`
 width: 100%;
 height: 100%;
+min-height: 100vh;
 background-image: linear-gradient(to left top, #0c84a9d6, #a356a5);
 background-repeat: no-repeat;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
 background-size: cover;
-position: absolute;
+position: relative;
 top: 0;
-z-index: -1;
 margin: 0;
+
 `;
 
 const AppContainer = styled.main`
@@ -23,13 +27,14 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 color: white;
-margin-top: 10vh;
+width: 100%;
+height: 100%;
 `;
 
 const Title = styled.h1`
 font-size: 2.5em;
 font-weight: 400;
-margin-top: 0em;
+margin-top: 2em;
 `;
 
 const Content = styled.section`
@@ -60,7 +65,7 @@ function App() {
     setTimeout(() => {
       dispatch(clearErrors());
     }, 3000);
-  }
+  };
 
   useEffect(() => {
     if (errors.length) {
@@ -69,12 +74,11 @@ function App() {
   });
 
   return (
-    <>
-      <GradientBackground />
+    <GradientBackground>
       <AppContainer className="App">
         <ErrorContainer>
           {
-              errors.map((error) => <ErrorMessage>{error}</ErrorMessage>)
+            errors.map((error) => <ErrorMessage>{error}</ErrorMessage>)
           }
         </ErrorContainer>
         <Title>Compare your Air</Title>
@@ -86,7 +90,7 @@ function App() {
         <AutoComplete />
         <CardList />
       </AppContainer>
-    </>
+    </GradientBackground>
   );
 }
 

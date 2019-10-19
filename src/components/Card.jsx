@@ -16,6 +16,7 @@ const CardContainer = styled.section`
   color: black;
   padding: 1.5em;
   padding-top: 1em;
+  min-width: 25%;
 `;
 
 const LastUpdated = styled.p`
@@ -48,6 +49,7 @@ const FaIcon = styled(Close)`
   width: 25px;
   height: 25px;
   align-self: flex-end;
+  cursor: pointer;
 `;
 
 function Card({ city }) {
@@ -76,12 +78,12 @@ function Card({ city }) {
       </Location>
       <Values>
 Values:
-        {locationData.map((value, index) => {
+        {locationData.length ? locationData.map((value, index) => {
           if (index === locationData.length - 1) {
             return ` ${value.parameter.toUpperCase()}: ${value.value}`;
           }
           return ` ${value.parameter.toUpperCase()}: ${value.value},`;
-        })}
+        }) : ` Sorry no values available.`}
       </Values>
     </CardContainer>
   );
