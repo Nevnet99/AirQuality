@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { Close } from 'styled-icons/evil/Close';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocationData } from '../redux/actions/index';
+import { getLocationData, removeCard } from '../redux/actions/index';
 
 const CardContainer = styled.section`
   display: flex;
@@ -14,6 +15,7 @@ const CardContainer = styled.section`
   margin: 1em;
   color: black;
   padding: 1.5em;
+  padding-top: 1em;
 `;
 
 const LastUpdated = styled.p`
@@ -42,15 +44,24 @@ const Values = styled.p`
   margin: 0;
 `;
 
+const FaIcon = styled(Close)`
+  width: 25px;
+  height: 25px;
+  align-self: flex-end;
+`;
+
 function Card({ city }) {
   const locationData = useSelector((state) => state.locationData
     .filter((location) => location.location === city.location));
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getLocationData(city.location, city.lastUpdated));
   }, []);
+
   return (
     <CardContainer>
+      <FaIcon onClick={() => dispatch(removeCard({id: city.id, location: city.location }))} icon={Close} />
       <LastUpdated>
         UPDATED
         {' '}
@@ -59,6 +70,7 @@ function Card({ city }) {
       <CardTitle>{city.location}</CardTitle>
       <Location>
         in
+        {' '}
       {city.city}
         , United Kingdom
       </Location>

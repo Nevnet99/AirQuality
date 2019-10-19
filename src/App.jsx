@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import AutoComplete from './components/AutoComplete';
 import CardList from './components/CardList';
+import { clearErrors } from './redux/actions';
 
 const GradientBackground = styled.div`
 width: 100%;
@@ -37,11 +39,44 @@ text-align: center;
 line-height: 1.5em;
 `;
 
+const ErrorContainer = styled.div`
+`;
+
+const ErrorMessage = styled.p`
+ background: #e22b2bbd;
+  color: white;
+  border-radius: 4px;
+  padding: 1em;
+  position: absolute;
+  top: 0em;
+  left: 3em;
+`;
+
 function App() {
+  const errors = useSelector((state) => state.error);
+  const dispatch = useDispatch();
+
+  const handleErrorTimeOut = () => {
+    setTimeout(() => {
+      dispatch(clearErrors());
+    }, 3000);
+  }
+
+  useEffect(() => {
+    if (errors.length) {
+      handleErrorTimeOut();
+    }
+  });
+
   return (
     <>
       <GradientBackground />
       <AppContainer className="App">
+        <ErrorContainer>
+          {
+              errors.map((error) => <ErrorMessage>{error}</ErrorMessage>)
+          }
+        </ErrorContainer>
         <Title>Compare your Air</Title>
         <Content>
           Compare the air quality between cities in the UK.
