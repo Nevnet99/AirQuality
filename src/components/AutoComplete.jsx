@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Search } from 'styled-icons/icomoon/Search';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserCity, getAutoCompleteData } from '../redux/actions/index';
+import { addUserCity, getAutoCompleteData, selectedCity } from '../redux/actions/index';
 
 
 const AutoCompleteContainer = styled.section`
@@ -12,18 +12,19 @@ const AutoCompleteContainer = styled.section`
     flex-direction: column;
     color: white;
     margin-top: 1em;
-    width: 25%;
+    width: 100%;
   `;
 
 const Input = styled.input`
     border: 2px solid lightgrey;
     border-radius: 8px;
     padding: 0.7em;
-    width: 100%;
+    width: 25%;
     outline: none;
     text-indent: 30px;
-    font-size: 0.8em;
+    font-size: 1em;
     z-index: 1;
+    font-weight: 100;
 
    ::placeholder {
      color: black;
@@ -37,6 +38,10 @@ const Input = styled.input`
 
 const InputContainer = styled.div`
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   `;
 
 const FaIcon = styled(Search)`
@@ -44,9 +49,9 @@ const FaIcon = styled(Search)`
     width: 17px;
     height: 17px;
     position: relative;
-    left: 1em;
-    top: 1.6em;
-    
+    right: 9.5em;
+    top: 1.9em;
+    z-index: 5;
   `;
 
 const AutoCompleteSection = styled.ul`
@@ -54,27 +59,29 @@ const AutoCompleteSection = styled.ul`
     align-items: flex-start;
     flex-direction: column;
     list-style: none;
-    padding: 0.65em;
     background: white;
-    width: 100%;
-    position: relative;
-    bottom: 0.5em;
+    width: 27%;
     z-index: 0;
-    margin: 0%;
+    margin: 0 ;
     color: black;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     overflow-y: scroll;
-    max-height: 4em;
+    max-height: 8em;
+    padding: 0;
+    position: relative;
+    bottom: 0.3em;
 
     /* width */
     ::-webkit-scrollbar {
-      width: 10px;
+      width: 8px;
+      z-index: -1;
     }
 
     /* Track */
     ::-webkit-scrollbar-track {
       background: none;
+      z-index: -1;
       
     }
 
@@ -82,17 +89,26 @@ const AutoCompleteSection = styled.ul`
     ::-webkit-scrollbar-thumb {
       background: lightgrey;
       border-radius: 20px; 
+      height: 30%;
+      z-index: -1;
     }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
       background: grey; 
+      z-index: -1;
     } 
   `;
 
 const AutoCompleteItem = styled.li`
-      margin: 0.5em 0em;
       font-weight: 100;
+      width: 95%;
+      height: 100%;
+      padding: 0.5em;
+      cursor: pointer;
+      :hover {
+        background: lightgrey;
+      }
   `;
 
 
@@ -119,7 +135,7 @@ function AutoComplete() {
              <AutoCompleteSection>
                {
               autoCompleteItems.map((cityInfo) => (
-                <AutoCompleteItem key={cityInfo.id}>
+                <AutoCompleteItem onClick={() => { dispatch(selectedCity(cityInfo.id)); }} key={cityInfo.id}>
                   {cityInfo.location}
                 </AutoCompleteItem>
               ))

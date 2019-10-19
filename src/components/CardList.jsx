@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import Card from './Card';
 
 const CardListContainer = styled.section`
 display: flex;
@@ -9,11 +11,14 @@ flex-wrap: wrap;
 `;
 
 function CardList() {
+  const userChosenCities = useSelector((state) => state.pickedCities);
 
 
   return (
     <CardListContainer>
-      <h1> Location of cards </h1>
+      {
+        userChosenCities.map((city) => <Card city={city} />)
+      }
     </CardListContainer>
   );
 }

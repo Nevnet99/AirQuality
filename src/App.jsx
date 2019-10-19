@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AutoComplete from './components/AutoComplete';
+import CardList from './components/CardList';
 
 const GradientBackground = styled.div`
 width: 100%;
@@ -48,6 +49,7 @@ function App() {
           Select cities to compare using the search tool below.
         </Content>
         <AutoComplete />
+        <CardList />
       </AppContainer>
     </>
   );
