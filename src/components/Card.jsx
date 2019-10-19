@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLocationData } from '../redux/actions/index';
 
 const CardContainer = styled.section`
   display: flex;
@@ -38,16 +40,37 @@ margin-bottom: 0.5em;
 const Values = styled.p`
   font-weight: 600;
   margin: 0;
-`
+`;
 
 function Card({ city }) {
-  
+  const locationData = useSelector((state) => state.locationData
+    .filter((location) => location.location === city.location));
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLocationData(city.location, city.lastUpdated));
+  }, []);
   return (
     <CardContainer>
-      <LastUpdated>UPDATED {moment(city.lastUpdated, "YYYYMMDD").fromNow().toUpperCase()}</LastUpdated>
+      <LastUpdated>
+        UPDATED
+        {' '}
+        {moment(city.lastUpdated, 'YYYYMMDD').fromNow().toUpperCase()}
+      </LastUpdated>
       <CardTitle>{city.location}</CardTitle>
-      <Location>in {city.city}, United Kingdom</Location>
-      <Values>Values: </Values>
+      <Location>
+        in
+      {city.city}
+        , United Kingdom
+      </Location>
+      <Values>
+Values:
+        {locationData.map((value, index) => {
+          if (index === locationData.length - 1) {
+            return ` ${value.parameter.toUpperCase()}: ${value.value}`;
+          }
+          return ` ${value.parameter.toUpperCase()}: ${value.value},`;
+        })}
+      </Values>
     </CardContainer>
   );
 }

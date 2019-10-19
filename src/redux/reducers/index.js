@@ -1,8 +1,9 @@
-import { ADD_USERCITY, GET_AUTOCOMPLETEDATA, CHOSEN_CITY } from '../constants/index';
+import { ADD_USERCITY, GET_AUTOCOMPLETEDATA, CHOSEN_CITY, GET_LOCATIONDATA } from '../constants/index';
 
 const initialState = {
   autoCompleteCities: [],
   autoCompleteData: [],
+  locationData: [],
   userCity: '',
   pickedCities: [],
 };
@@ -24,8 +25,11 @@ function rootReducer(state = initialState, action) {
         return city;
       }
     });
-
     return { ...state, pickedCities: state.pickedCities.concat(userChosenCity) };
+  }
+
+  if (action.type === GET_LOCATIONDATA) {
+    return { ...state, locationData: state.locationData.concat(action.payload) };
   }
 
   return state;
