@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import Bounce from 'react-reveal/Bounce';
 import AutoComplete from './components/AutoComplete';
 import CardList from './components/CardList';
 import { clearErrors } from './redux/actions';
@@ -45,6 +46,12 @@ line-height: 1.5em;
 `;
 
 const ErrorContainer = styled.div`
+* {
+  position: fixed;
+  top: 0em;
+  left: 3em;
+  width: 45%;
+}
 `;
 
 const ErrorMessage = styled.p`
@@ -52,9 +59,6 @@ const ErrorMessage = styled.p`
   color: white;
   border-radius: 4px;
   padding: 1em;
-  position: absolute;
-  top: 0em;
-  left: 3em;
 `;
 
 function App() {
@@ -78,7 +82,7 @@ function App() {
       <AppContainer className="App">
         <ErrorContainer>
           {
-            errors.map((error) => <ErrorMessage>{error}</ErrorMessage>)
+            errors.map((error) => <Bounce><ErrorMessage>{error}</ErrorMessage></Bounce>)
           }
         </ErrorContainer>
         <Title>Compare your Air</Title>

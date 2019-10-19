@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Close } from 'styled-icons/evil/Close';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLocationData, removeCard } from '../redux/actions/index';
 
@@ -63,7 +64,10 @@ function Card({ city }) {
 
   return (
     <CardContainer>
-      <FaIcon onClick={() => dispatch(removeCard({id: city.id, location: city.location }))} icon={Close} />
+      <FaIcon
+        onClick={() => dispatch(removeCard({ id: city.id, location: city.location }))}
+        icon={Close}
+      />
       <LastUpdated>
         UPDATED
         {' '}
@@ -73,7 +77,7 @@ function Card({ city }) {
       <Location>
         in
         {' '}
-      {city.city}
+        {city.city}
         , United Kingdom
       </Location>
       <Values>
@@ -83,10 +87,19 @@ Values:
             return ` ${value.parameter.toUpperCase()}: ${value.value}`;
           }
           return ` ${value.parameter.toUpperCase()}: ${value.value},`;
-        }) : ` Sorry no values available.`}
+        }) : ' Sorry no values available.'}
       </Values>
     </CardContainer>
   );
 }
+
+Card.propTypes = {
+  city: PropTypes.shape({
+    id: PropTypes.number,
+    location: PropTypes.string,
+    city: PropTypes.string,
+    lastUpdated: PropTypes.string,
+  }).isRequired,
+};
 
 export default Card;

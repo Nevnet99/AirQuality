@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Search } from 'styled-icons/icomoon/Search';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +25,9 @@ const Input = styled.input`
     font-size: 1em;
     z-index: 1;
     font-weight: 100;
+    @media (max-width: 768px) {
+      width: 80%;
+    }
 
    ::placeholder {
      color: black;
@@ -52,6 +55,10 @@ const FaIcon = styled(Search)`
     right: 9.5em;
     top: 1.9em;
     z-index: 5;
+
+    @media (max-width: 768px) {
+      right: 8.5em;
+    }
   `;
 
 const AutoCompleteSection = styled.ul`
@@ -71,6 +78,10 @@ const AutoCompleteSection = styled.ul`
     padding: 0;
     position: relative;
     bottom: 0.3em;
+
+    @media (max-width: 768px) {
+      width: 86%;
+    }
 
     /* width */
     ::-webkit-scrollbar {
@@ -135,7 +146,7 @@ function AutoComplete() {
              <AutoCompleteSection>
                {
               autoCompleteItems.map((cityName) => (
-                <AutoCompleteItem onClick={() => { dispatch(selectedCity(cityName)); }} key={cityName}>
+                <AutoCompleteItem onClick={() => dispatch(selectedCity(cityName))} key={cityName}>
                   {cityName}
                 </AutoCompleteItem>
               ))
