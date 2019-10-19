@@ -1,4 +1,7 @@
-import { ADD_USERCITY, GET_AUTOCOMPLETEDATA, CHOSEN_CITY, GET_LOCATIONDATA, REMOVE_CARD, CLEAR_ERRORS } from '../constants/index';
+import {
+  ADD_USERCITY, GET_AUTOCOMPLETEDATA, CHOSEN_CITY, GET_LOCATIONDATA, REMOVE_CARD, CLEAR_ERRORS,
+} from '../constants/index';
+
 
 const initialState = {
   autoCompleteCities: [],
@@ -32,7 +35,29 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === GET_LOCATIONDATA) {
-    return { ...state, locationData: state.locationData.concat(action.payload) };
+    const orderedValues = action.payload.reduce((acc, cur) => {
+      if (acc[cur.parameter]) {
+        acc[cur.parameter].push(cur);
+      } else {
+        acc[cur.parameter] = [];
+        acc[cur.parameter].push(cur);
+      }
+      return acc;
+    }, {});
+
+    const mostRecentValues = [];
+
+    Object.keys(orderedValues).forEach((key) => {
+      if (orderedValues[key].length > 1) {
+        const mostRecent = orderedValues[key]
+          .reduce((acc, currentValue) => (acc.date.utc > currentValue.date.utc ? acc : currentValue));
+        mostRecentValues.push(mostRecent);
+      } else {
+        mostRecentValues.push(orderedValues[key][0]);
+      }
+    });
+
+    return { ...state, locationData: state.locationData.concat(mostRecentValues) };
   }
 
   if (action.type === REMOVE_CARD) {

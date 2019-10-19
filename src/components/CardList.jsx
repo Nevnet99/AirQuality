@@ -13,7 +13,6 @@ flex-wrap: wrap;
 function CardList() {
   const userChosenCities = useSelector((state) => state.pickedCities);
 
-
   return (
     <CardListContainer>
       {
