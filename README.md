@@ -20,6 +20,7 @@ Lastly, I've decided this time to tackle this challenge using functional compone
 
 ## Where it is hosted.
 
+  [It's hosted here !](https://compareyourair.herokuapp.com)
 
 ## What I would have done with more time. 
 
@@ -30,6 +31,8 @@ Lastly, I've decided this time to tackle this challenge using functional compone
    - Extract the reducer and filter into its own function as well as fix the error with no      values in the GET_LOCATIONDATA reducer.
    - Made the autocomplete component more responsive for larger and tablet sized screens.
    - Utilise the error state that I didnt get to use to much. 
-   - Multi browser testing. 
+   - Multi browser testing. (Definatly need to look for a solution for the background it does not show up on edge.).
+   - responsiveness of firefox needs to be looked at as well. 
+   
 
 
