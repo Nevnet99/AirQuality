@@ -1,5 +1,5 @@
 import {
-  ADD_USERCITY, GET_AUTOCOMPLETEDATA, CHOSEN_CITY, GET_LOCATIONDATA, REMOVE_CARD, CLEAR_ERRORS,
+  ADD_USERCITY, GET_AUTOCOMPLETEDATA, CHOSEN_CITY, GET_LOCATIONDATA, REMOVE_CARD, CLEAR_ERRORS, CLEAR_AUTOCOMPLETEDATA,
 } from '../constants/index';
 
 
@@ -17,6 +17,10 @@ function rootReducer(state = initialState, action) {
       .filter((value, index, self) => self.indexOf(value) === index);
 
     return { ...state, autoCompleteCities: getDistinctCities, autoCompleteData: action.payload };
+  }
+
+  if (action.type === CLEAR_AUTOCOMPLETEDATA) {
+    return { ...state, autoCompleteCities: [] };
   }
 
   if (action.type === ADD_USERCITY) {

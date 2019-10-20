@@ -81,13 +81,8 @@ function Card({ city }) {
         , United Kingdom
       </Location>
       <Values>
-Values:
-        {locationData.length ? locationData.map((value, index) => {
-          if (index === locationData.length - 1) {
-            return ` ${value.parameter.toUpperCase()}: ${value.value}`;
-          }
-          return ` ${value.parameter.toUpperCase()}: ${value.value},`;
-        }) : ' Sorry no values available.'}
+        Values:
+        { locationData.map((value) => ` ${value.parameter.toUpperCase()}: ${value.value}`).join(', ')}
       </Values>
     </CardContainer>
   );
@@ -95,7 +90,7 @@ Values:
 
 Card.propTypes = {
   city: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     location: PropTypes.string,
     city: PropTypes.string,
     lastUpdated: PropTypes.string,

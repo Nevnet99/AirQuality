@@ -16,7 +16,7 @@ function CardList() {
   return (
     <CardListContainer>
       {
-        userChosenCities.map((city) => <Card city={city} />)
+        userChosenCities.map((city) => <Card city={city} key={city.location} />)
       }
     </CardListContainer>
   );

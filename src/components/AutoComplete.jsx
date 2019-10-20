@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Search } from 'styled-icons/icomoon/Search';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserCity, getAutoCompleteData, selectedCity } from '../redux/actions/index';
+import { addUserCity, getAutoCompleteData, selectedCity, removeAutoCompleteData } from '../redux/actions/index';
 import useDebounce from '../customHooks/useDebounce';
 
 const AutoCompleteContainer = styled.section`
@@ -128,8 +128,11 @@ function AutoComplete() {
   const userCity = useSelector((state) => state.userCity);
   const dispatch = useDispatch();
   const debouncedUserCity = useDebounce(userCity, 200);
-
+  const showAutoComplete = autoCompleteItems.length && userCity !== '';
   const handleInputChange = (e) => {
+    if (e.target.value === '') {
+      dispatch(removeAutoCompleteData());
+    }
     dispatch(addUserCity(e.target.value));
   };
 
@@ -149,8 +152,8 @@ function AutoComplete() {
         <Input autoComplete="off" onChange={handleInputChange} value={userCity} type="text" name="city" placeholder="Enter city name..." />
 
         {
-         autoCompleteItems.length && userCity !== ''
-           ? (
+         !!showAutoComplete
+           && (
              <AutoCompleteSection>
                {
               autoCompleteItems.map((cityName) => (
@@ -158,9 +161,9 @@ function AutoComplete() {
                   {cityName}
                 </AutoCompleteItem>
               ))
-            }
+              }
              </AutoCompleteSection>
-           ) : null
+           )
         }
 
       </InputContainer>

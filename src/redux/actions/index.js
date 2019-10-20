@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_AUTOCOMPLETEDATA, ADD_USERCITY, CHOSEN_CITY, GET_LOCATIONDATA, REMOVE_CARD, CLEAR_ERRORS } from '../constants/index';
+import { GET_AUTOCOMPLETEDATA, ADD_USERCITY, CHOSEN_CITY, GET_LOCATIONDATA, REMOVE_CARD, CLEAR_ERRORS, CLEAR_AUTOCOMPLETEDATA } from '../constants/index';
 
 export function addUserCity(payload) {
   return { type: ADD_USERCITY, payload };
@@ -22,6 +22,9 @@ export function removeCard(payload) {
   return { type: REMOVE_CARD, payload };
 }
 
+export function removeAutoCompleteData(payload) {
+  return { type: CLEAR_AUTOCOMPLETEDATA, payload };
+}
 
 export function getLocationData(location, lastUpdated) {
   return function (dispatch) {
