@@ -16,6 +16,8 @@ Lastly, I've decided this time to tackle this challenge using functional compone
   
   `npm start` into a cli.
 
+  `npm test` to run tests.
+
 ## Where it is hosted.
 
 
@@ -28,5 +30,6 @@ Lastly, I've decided this time to tackle this challenge using functional compone
    - Extract the reducer and filter into its own function as well as fix the error with no      values in the GET_LOCATIONDATA reducer.
    - Made the autocomplete component more responsive for larger and tablet sized screens.
    - Utilise the error state that I didnt get to use to much. 
+   - Multi browser testing. 
 
 
