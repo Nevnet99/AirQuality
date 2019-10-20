@@ -1,8 +1,6 @@
 ## Reasons/Approach to the task.
 ___
 
-*Foreword:* I'll be pushing to master for ease. Please Please Please do not think I do not use branches. 💖
-
 ### Setup
 First, I used create react app to save time to be able to focus more on the project at hand. As well as this, I added ESLINT to my project to lint my project to check for any styling errors/code mishaps (AIRBNB). 
 

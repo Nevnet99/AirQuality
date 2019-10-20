@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Search } from 'styled-icons/icomoon/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUserCity, getAutoCompleteData, selectedCity } from '../redux/actions/index';
-
+import useDebounce from '../customHooks/useDebounce';
 
 const AutoCompleteContainer = styled.section`
     display: flex;
@@ -127,12 +127,20 @@ function AutoComplete() {
   const autoCompleteItems = useSelector((state) => state.autoCompleteCities);
   const userCity = useSelector((state) => state.userCity);
   const dispatch = useDispatch();
+  const debouncedUserCity = useDebounce(userCity, 200);
 
   const handleInputChange = (e) => {
     dispatch(addUserCity(e.target.value));
-    dispatch(getAutoCompleteData(userCity));
   };
 
+  useEffect(
+    () => {
+      if (debouncedUserCity) {
+        dispatch(getAutoCompleteData(userCity));
+      }
+    },
+    [debouncedUserCity],
+  );
 
   return (
     <AutoCompleteContainer>
