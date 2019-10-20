@@ -10,12 +10,17 @@ although the application is small the last time I attempted this tech test, I fo
 Lastly, I've decided this time to tackle this challenge using functional components and hooks, this pairs really nicely with styled components and is also the best practise currently for writing react code. 
 
 
-## How to run the project.
+## How to run the project localy.
 
+  Clone this repo. 
+  
+  `npm start` into a cli.
 
 ## Where it is hosted.
 
 
 ## What I would have done with more time. 
+
+  I decided to do tests after the code had been written due to time on the tech test. 
 
 

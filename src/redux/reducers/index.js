@@ -29,8 +29,8 @@ function rootReducer(state = initialState, action) {
 
   if (action.type === CHOSEN_CITY) {
     const userChosenCity = state.autoCompleteData.filter((city) => city.city === action.payload);
-
     const checkForDupes = state.pickedCities.filter((city) => city.city === action.payload);
+
     if (checkForDupes.length) {
       return { ...state, error: state.error.concat(`Cannot add ${action.payload} twice.`) };
     }
@@ -53,8 +53,7 @@ function rootReducer(state = initialState, action) {
 
     Object.keys(orderedValues).forEach((key) => {
       if (orderedValues[key].length > 1) {
-        const mostRecent = orderedValues[key]
-          .reduce((acc, currentValue) => (acc.date.utc > currentValue.date.utc ? acc : currentValue));
+        const mostRecent = orderedValues[key].reduce((acc, currentValue) => (acc.date.utc > currentValue.date.utc ? currentValue : acc));
         mostRecentValues.push(mostRecent);
       } else {
         mostRecentValues.push(orderedValues[key][0]);
