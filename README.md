@@ -23,8 +23,9 @@ Lastly, I've decided this time to tackle this challenge using functional compone
 
   I decided to do tests after the code had been written due to time on the tech test.
 
+   - Started by writing the tests first to follow TDD.
    - I would have with more time tested the react code with enzyme.
-   - Extract the reducer and filter into its own function as well as fix the error with no values in the GET_LOCATIONDATA reducer.
+   - Extract the reducer and filter into its own function as well as fix the error with no      values in the GET_LOCATIONDATA reducer.
    - Made the autocomplete component more responsive for larger and tablet sized screens.
    - Utilise the error state that I didnt get to use to much. 
 
