@@ -59,6 +59,7 @@ function rootReducer(state = initialState, action) {
         mostRecentValues.push(orderedValues[key][0]);
       }
     });
+    
 
     return { ...state, locationData: state.locationData.concat(mostRecentValues) };
   }

@@ -82,7 +82,7 @@ function Card({ city }) {
       </Location>
       <Values>
         Values:
-        { locationData.map((value) => ` ${value.parameter.toUpperCase()}: ${value.value}`).join(', ')}
+        { locationData.length ? locationData.map((value) => ` ${value.parameter.toUpperCase()}: ${value.value}`).join(', ') : ` Sorry no values available.`}
       </Values>
     </CardContainer>
   );
